@@ -13,7 +13,7 @@ import java.util.TimerTask;
 
 
 /**
- *mainFrame hehe
+ *mainFrame heheh
  * @author krpa
  */
 public class Jframe1 extends javax.swing.JFrame {
