@@ -46,7 +46,7 @@ public class Jframe1 extends javax.swing.JFrame {
                  timer.cancel();
                  timer.purge();
                  blnVecIde=false;
-                 System.out.println("Izasao na kraju");
+                 //System.out.println("Izasao na kraju");
                  Toolkit.getDefaultToolkit().beep();
                  Jframe1.super.setVisible(true);
                  lblOdbrojavanje.setText("####");
@@ -63,18 +63,16 @@ public class Jframe1 extends javax.swing.JFrame {
                  timer.cancel();
                  timer.purge();
                  blnVecIde=false;
-                 System.out.println("Izasao na stopu");
+                 //System.out.println("Izasao na stopu");
             }
              else{
-             System.out.println(countdown);
+             //System.out.println(countdown);
              lblOdbrojavanje.setText(String.valueOf(countdown));
              }
                 //label.setText(countdown +"second's left");
             }   
         },0, 1000);
-     //timer.cancel();
-     //timer.purge();
-     
+    
     }
     
     /**
@@ -240,10 +238,9 @@ public class Jframe1 extends javax.swing.JFrame {
         Integer intDuzina;
         String strDuzina;
         strDuzina = txtDuzina.getText();
-                System.out.println(strDuzina);
+                //System.out.println(strDuzina);
 
         if(strDuzina.isBlank() || strDuzina.isEmpty()){
-            
         }
         else{
             
@@ -252,20 +249,18 @@ public class Jframe1 extends javax.swing.JFrame {
                 }    
                 catch(Exception e){
                 return;
-        
                 }
-         
             countdown = intDuzina;
             if(!blnVecIde){
                 blnVecIde=true;
                 countingDown();
-                System.out.println("opet zvao countdown");
+               // System.out.println("opet zvao countdown");
                 
             }
             }
         
         //blnVecIde=false;
-        System.out.println("kraj button click");
+       // System.out.println("kraj button click");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -275,18 +270,7 @@ public class Jframe1 extends javax.swing.JFrame {
     
     //kada se klikne enter u broju counter
     private void txtDuzinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuzinaActionPerformed
-    //   txtDuzina.addActionListener(new ActionListener() {
-    //        @Override
-    //        public void actionPerformed(ActionEvent e) {
-    //        //myTextArea.append(myTextField.getText() + "\n");
-    //        }
-    //    });
-    //   jButton1.doClick();
-    
-     //if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-      // Enter was pressed. Your code goes here.
-   //}
-    
+      
         
     }//GEN-LAST:event_txtDuzinaActionPerformed
 
@@ -311,7 +295,6 @@ public class Jframe1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             // Enter was pressed. Your code goes here.
-            
             jButton1.doClick();
         }
         else if(evt.getKeyCode() == KeyEvent.VK_S){
@@ -323,8 +306,6 @@ public class Jframe1 extends javax.swing.JFrame {
     private void txtDuzina1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuzina1ActionPerformed
         // TODO add your handling code here:
              
-       
-            
     }//GEN-LAST:event_txtDuzina1ActionPerformed
 
     private void txtDuzina1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuzina1KeyPressed
