@@ -10,6 +10,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.BadLocationException;
 
 
 /**
@@ -22,31 +25,6 @@ public class Jframe1 extends javax.swing.JFrame {
    Boolean stop = false;
    Boolean blnVecIde = false;
    
-   /*//nije u funkciji
-   public void countDown2(){
-    long delay;
-        System.out.println(Integer.toString(countdown));
-        delay = 1000;
-
-        final Timer timer = new Timer();
-
-        final TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println(Integer.toString(countdown));
-                Toolkit.getDefaultToolkit().beep();
-                if (stop || countdown < 1){
-                
-                timer.cancel();
-                timer.purge();
-                }
-            }
-        };
-
-        timer.schedule(task, delay);
-       System.out.println("countDown2 gotovo");
-   }
-   */
    
    //ovo je glavna metoda
     public void countingDown(){
@@ -120,6 +98,8 @@ public class Jframe1 extends javax.swing.JFrame {
         txtDuzina = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        txtDuzina1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(350, 200));
@@ -140,10 +120,15 @@ public class Jframe1 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         txtDuzina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtDuzina.setText("180");
-        txtDuzina.setMinimumSize(new java.awt.Dimension(70, 30));
+        txtDuzina.setMinimumSize(new java.awt.Dimension(70, 35));
         txtDuzina.setName("txtDuzina"); // NOI18N
         txtDuzina.setPreferredSize(new java.awt.Dimension(70, 30));
         txtDuzina.addActionListener(new java.awt.event.ActionListener() {
@@ -164,25 +149,59 @@ public class Jframe1 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
         jLabel1.setText("F5 start - stop");
+
+        txtDuzina1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        txtDuzina1.setText("3");
+        txtDuzina1.setMinimumSize(new java.awt.Dimension(70, 30));
+        txtDuzina1.setName("txtDuzina1"); // NOI18N
+        txtDuzina1.setPreferredSize(new java.awt.Dimension(70, 30));
+        txtDuzina1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDuzina1ActionPerformed(evt);
+            }
+        });
+        txtDuzina1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDuzina1KeyPressed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
+        jButton3.setText("Min");
+        jButton3.setAlignmentX(0.5F);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2)
-                            .addGap(29, 29, 29)
-                            .addComponent(jButton1))
-                        .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtDuzina1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtDuzina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
                     .addComponent(jLabel1))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -191,13 +210,17 @@ public class Jframe1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
-                .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDuzina1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         pack();
@@ -268,9 +291,8 @@ public class Jframe1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDuzinaActionPerformed
 
     private void txtDuzinaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuzinaKeyPressed
-                // TODOsout add your handling code here:
+            
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            // Enter was pressed. Your code goes here.
             jButton1.doClick();
         }
         else if(evt.getKeyCode() == KeyEvent.VK_F5){
@@ -297,6 +319,76 @@ public class Jframe1 extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_formKeyPressed
+
+    private void txtDuzina1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuzina1ActionPerformed
+        // TODO add your handling code here:
+             
+       
+            
+    }//GEN-LAST:event_txtDuzina1ActionPerformed
+
+    private void txtDuzina1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuzina1KeyPressed
+        // TODO add your handling code here:
+             
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButton3.doClick();
+        }
+        else if(evt.getKeyCode() == KeyEvent.VK_F5){
+            if(blnVecIde){
+                jButton2.doClick();
+            }
+            else{
+                jButton1.doClick();
+            }
+        }
+        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
+            
+    }//GEN-LAST:event_txtDuzina1KeyPressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        int a = Integer.parseInt(txtDuzina1.getText());
+        int b = a * 60;
+        txtDuzina.setText(Integer.toString(b));
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+        // TODO add your handling code here:
+             
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButton2.doClick();
+        }
+        else if(evt.getKeyCode() == KeyEvent.VK_F5){
+            if(blnVecIde){
+                jButton2.doClick();
+            }
+            else{
+                jButton1.doClick();
+            }
+        }
+        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
+            
+    }//GEN-LAST:event_jButton2KeyPressed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:
+             
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jButton1.doClick();
+        }
+        else if(evt.getKeyCode() == KeyEvent.VK_F5){
+            if(blnVecIde){
+                jButton2.doClick();
+            }
+            else{
+                jButton1.doClick();
+            }
+        }
+        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
+            
+    }//GEN-LAST:event_jButton1KeyPressed
 
     
     /**
@@ -340,9 +432,11 @@ public class Jframe1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblOdbrojavanje;
     private javax.swing.JTextField txtDuzina;
+    private javax.swing.JTextField txtDuzina1;
     // End of variables declaration//GEN-END:variables
 
    
