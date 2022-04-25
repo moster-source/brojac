@@ -46,7 +46,7 @@ public class Jframe1 extends javax.swing.JFrame {
                  timer.cancel();
                  timer.purge();
                  blnVecIde=false;
-                 //System.out.println("Izasao na kraju");
+                 //System.out.println("Izasao na kraju"); //test
                  Toolkit.getDefaultToolkit().beep();
                  Jframe1.super.setVisible(true);
                  lblOdbrojavanje.setText("####");
