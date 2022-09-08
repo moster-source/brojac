@@ -55,8 +55,15 @@ public class Jframe1 extends javax.swing.JFrame {
                  
                  //postavi prozor u prvi plan
                  int d = java.awt.Frame.ICONIFIED;
+                 //dize kad je u pozadini
+                    Jframe1.super.setAlwaysOnTop(true);
+                    Jframe1.super.toFront();
+                    Jframe1.super.requestFocus();
+                    Jframe1.super.setAlwaysOnTop(false);
+                 
+                 //
                          if(d== Jframe1.super.getState()){
-                Jframe1.super.setState(Frame.NORMAL);
+                Jframe1.super.setState(Frame.NORMAL);            //dize gad je minimaliziran
                 }
                  }
              else if(stop){
