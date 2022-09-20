@@ -10,9 +10,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.BadLocationException;
 
 
 /**
@@ -74,12 +71,24 @@ public class Jframe1 extends javax.swing.JFrame {
             }
              else{
              //System.out.println(countdown);
-             lblOdbrojavanje.setText(String.valueOf(countdown));
+             //bivši countdown samo sekunde
+             //lblOdbrojavanje.setText(String.valueOf(countdown));
+             //System.out.println(strVratiVrijeme(countdown));
+                 lblOdbrojavanje.setText(strVratiVrijeme(countdown));
              }
                 //label.setText(countdown +"second's left");
             }   
         },0, 1000);
     
+    }
+    private String strVratiVrijeme(int intSekunde){
+        String strVrati = null;
+        int intMinute = intSekunde / 60;
+        int SekundeTemp = intSekunde - (intMinute * 60);
+        strVrati = Integer.toString(intMinute).concat(":".concat(Integer.toString(SekundeTemp)));
+        
+    
+        return strVrati;
     }
     
     /**
