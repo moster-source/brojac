@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JFrame;
 
 
 /**
@@ -52,15 +53,29 @@ public class Jframe1 extends javax.swing.JFrame {
                  
                  //postavi prozor u prvi plan
                  int d = java.awt.Frame.ICONIFIED;
-                 //dize kad je u pozadini
-                    Jframe1.super.setAlwaysOnTop(true);
+                                     Jframe1.super.setAlwaysOnTop(true);
                     Jframe1.super.toFront();
                     Jframe1.super.requestFocus();
                     Jframe1.super.setAlwaysOnTop(false);
-                 
+                 //dize kad je u pozadini
+                    //Jframe1.super.setAlwaysOnTop(true);
+                    //Jframe1.super.setVisible(true);
+                    //Jframe1.super.setFocusable(true);
+                    //Jframe1.super.setExtendedState(JFrame.NORMAL);
+                    Jframe1.super.toFront();
+                    //Jframe1.super.repaint();
+                    //Jframe1.super.requestFocus();
+                    //Jframe1.super.setAlwaysOnTop(true);
+                    //jButton1.requestFocus();
+                    //System.out.println("###");
+                    //System.out.println("gornji");
+                    //Jframe1.super.setExtendedState(JFrame.NORMAL);
                  //
                          if(d== Jframe1.super.getState()){
-                Jframe1.super.setState(Frame.NORMAL);            //dize gad je minimaliziran
+                Jframe1.super.setState(Frame.NORMAL);
+                Jframe1.super.requestFocus();
+                jButton1.requestFocus();//dize gad je minimaliziran
+                             System.out.println("Doljnji");
                 }
                  }
              else if(stop){
