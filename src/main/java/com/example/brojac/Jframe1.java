@@ -129,6 +129,7 @@ public class Jframe1 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtDuzina1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        txtDuzina2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(350, 200));
@@ -212,12 +213,27 @@ public class Jframe1 extends javax.swing.JFrame {
             }
         });
 
+        txtDuzina2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtDuzina2.setMinimumSize(new java.awt.Dimension(50, 35));
+        txtDuzina2.setName("txtDuzina"); // NOI18N
+        txtDuzina2.setPreferredSize(new java.awt.Dimension(50, 30));
+        txtDuzina2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDuzina2ActionPerformed(evt);
+            }
+        });
+        txtDuzina2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDuzina2KeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -228,11 +244,15 @@ public class Jframe1 extends javax.swing.JFrame {
                                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtDuzina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(47, 47, 47)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel1))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtDuzina2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(4, 4, 4))))
+                    .addComponent(jLabel1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,8 +262,11 @@ public class Jframe1 extends javax.swing.JFrame {
                 .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDuzina1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                    .addComponent(txtDuzina1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtDuzina2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -286,7 +309,6 @@ public class Jframe1 extends javax.swing.JFrame {
                 blnVecIde=true;
                 countingDown();
                // System.out.println("opet zvao countdown");
-                
             }
             }
         
@@ -402,6 +424,14 @@ public class Jframe1 extends javax.swing.JFrame {
             
     }//GEN-LAST:event_jButton1KeyPressed
 
+    private void txtDuzina2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuzina2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuzina2ActionPerformed
+
+    private void txtDuzina2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuzina2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuzina2KeyPressed
+
     
     /**
      * @param args the command line arguments
@@ -449,6 +479,7 @@ public class Jframe1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblOdbrojavanje;
     private javax.swing.JTextField txtDuzina;
     private javax.swing.JTextField txtDuzina1;
+    private javax.swing.JTextField txtDuzina2;
     // End of variables declaration//GEN-END:variables
 
    
