@@ -132,6 +132,7 @@ public class Jframe1 extends javax.swing.JFrame {
         txtDuzina2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setFocusable(false);
         setResizable(false);
         setSize(new java.awt.Dimension(340, 200));
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -143,9 +144,11 @@ public class Jframe1 extends javax.swing.JFrame {
         lblOdbrojavanje.setFont(new java.awt.Font("Segoe UI", 1, 88)); // NOI18N
         lblOdbrojavanje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblOdbrojavanje.setText("####");
+        lblOdbrojavanje.setFocusable(false);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Start");
+        jButton1.setFocusable(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -175,6 +178,7 @@ public class Jframe1 extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setText("Stop");
+        jButton2.setFocusable(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -188,6 +192,7 @@ public class Jframe1 extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
         jLabel1.setText("F5 start - stop");
+        jLabel1.setFocusable(false);
 
         txtDuzina1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         txtDuzina1.setText("3");
@@ -208,6 +213,7 @@ public class Jframe1 extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         jButton3.setText("Min");
         jButton3.setAlignmentX(0.5F);
+        jButton3.setFocusable(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -236,19 +242,18 @@ public class Jframe1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtDuzina2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDuzina2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtDuzina1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -258,7 +263,7 @@ public class Jframe1 extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(12, 12, 12)
                 .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,8 +277,7 @@ public class Jframe1 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1)))
         );
 
         pack();
@@ -430,7 +434,28 @@ public class Jframe1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDuzina2ActionPerformed
 
     private void txtDuzina2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuzina2KeyPressed
-        // TODO add your handling code here:
+        
+       
+       
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //jButton1.doClick();
+        }
+        else if(evt.getKeyCode() == KeyEvent.VK_F5){
+            if(blnVecIde){
+                jButton2.doClick();
+            }
+            else{
+                jButton1.doClick();
+            }
+        }
+        
+        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
+        if(evt.getKeyCode() == KeyEvent.VK_F5) {
+            JFrame xxx = new Jframe();
+            
+            Jframe1.setState(Frame.ICONIFIED);
+        }
+        
     }//GEN-LAST:event_txtDuzina2KeyPressed
 
     
