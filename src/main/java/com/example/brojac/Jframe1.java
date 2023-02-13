@@ -132,7 +132,7 @@ public class Jframe1 extends javax.swing.JFrame {
         txtDuzina2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setFocusable(false);
+        setFocusTraversalPolicyProvider(true);
         setResizable(false);
         setSize(new java.awt.Dimension(340, 200));
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -162,6 +162,7 @@ public class Jframe1 extends javax.swing.JFrame {
 
         txtDuzina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtDuzina.setText("180");
+        txtDuzina.setFocusTraversalPolicyProvider(true);
         txtDuzina.setMinimumSize(new java.awt.Dimension(70, 35));
         txtDuzina.setName("txtDuzina"); // NOI18N
         txtDuzina.setPreferredSize(new java.awt.Dimension(70, 30));
@@ -196,6 +197,7 @@ public class Jframe1 extends javax.swing.JFrame {
 
         txtDuzina1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         txtDuzina1.setText("3");
+        txtDuzina1.setFocusTraversalPolicyProvider(true);
         txtDuzina1.setMinimumSize(new java.awt.Dimension(70, 30));
         txtDuzina1.setName("txtDuzina1"); // NOI18N
         txtDuzina1.setPreferredSize(new java.awt.Dimension(70, 30));
@@ -221,6 +223,7 @@ public class Jframe1 extends javax.swing.JFrame {
         });
 
         txtDuzina2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtDuzina2.setFocusTraversalPolicyProvider(true);
         txtDuzina2.setMinimumSize(new java.awt.Dimension(50, 35));
         txtDuzina2.setName("txtDuzina"); // NOI18N
         txtDuzina2.setPreferredSize(new java.awt.Dimension(50, 30));
@@ -345,7 +348,10 @@ public class Jframe1 extends javax.swing.JFrame {
                 jButton1.doClick();
             }
         }
-        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
+                if(evt.getKeyCode() == KeyEvent.VK_F6) {
+            Jframe1.this.setState(Frame.ICONIFIED);
+           
+        }
             
     }//GEN-LAST:event_txtDuzinaKeyPressed
 
@@ -380,7 +386,19 @@ public class Jframe1 extends javax.swing.JFrame {
                 jButton1.doClick();
             }
         }
-        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
+                if(evt.getKeyCode() == KeyEvent.VK_F6) {
+            Jframe1.this.setState(Frame.ICONIFIED);
+           
+        }
+                
+                if(evt.getKeyCode() == KeyEvent.VK_TAB) {
+            //Jframe1.this.setState(Frame.ICONIFIED);
+            
+                    this.txtDuzina2.requestFocus();
+                    System.out.println("tab");
+           
+        }
+                
             
     }//GEN-LAST:event_txtDuzina1KeyPressed
 
@@ -434,8 +452,6 @@ public class Jframe1 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDuzina2ActionPerformed
 
     private void txtDuzina2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuzina2KeyPressed
-        
-       
        
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //jButton1.doClick();
@@ -449,11 +465,10 @@ public class Jframe1 extends javax.swing.JFrame {
             }
         }
         
-        //else if(evt.getKeyCode()== KeyEvent.VK_F5){
-        if(evt.getKeyCode() == KeyEvent.VK_F5) {
-            JFrame xxx = new Jframe();
-            
-            Jframe1.setState(Frame.ICONIFIED);
+        //F6 minimalizira
+        if(evt.getKeyCode() == KeyEvent.VK_F6) {
+            Jframe1.this.setState(Frame.ICONIFIED);
+           
         }
         
     }//GEN-LAST:event_txtDuzina2KeyPressed
