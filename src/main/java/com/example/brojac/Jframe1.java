@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.image.ColorModel;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
@@ -22,6 +23,8 @@ public class Jframe1 extends javax.swing.JFrame {
    int countdown = 0;
    Boolean stop = false;
    Boolean blnVecIde = false;
+   Color c;
+   int intDuzina;
    
    
    //ovo je glavna metoda
@@ -111,6 +114,7 @@ public class Jframe1 extends javax.swing.JFrame {
      */
     public Jframe1() {
         initComponents();
+        c=jButton1.getBackground();
     }
 
     /**
@@ -332,14 +336,36 @@ public class Jframe1 extends javax.swing.JFrame {
      public void blicaj(){
           Timer timer2 = new Timer();
        
-     timer2.schedule(new TimerTask(){
+            timer2.schedule(new TimerTask(){
+                int duzina = intDuzina;
+               
          
             @Override
             public void run() {
-			
+             //public variable c, i kod init stavlja
+              
+              if(jButton1.getBackground() == Color.RED){
+                jButton1.setBackground(c);
+                jButton1.repaint();
+                  //System.out.println("Ušao u prvi if");
+                }
+              else{
+                  jButton1.setBackground(Color.RED);
+                  jButton1.repaint();
+                  //System.out.println("Ušao u drugi if");
+              }
+              duzina--;
+              if(duzina<0){
+                 jButton1.setBackground(c);
+                 timer2.cancel();
+                 timer2.purge();
+                 
+              }
+              //System.out.println("duzina je " + duzina);
+              
 			
             }
-    },0, 1000);
+    },0, 30);
      
      
      }
@@ -347,9 +373,8 @@ public class Jframe1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
         //## neka blicne malo
-  
-        
-        
+        intDuzina=10;
+        blicaj();
         
         
         
@@ -570,6 +595,7 @@ public class Jframe1 extends javax.swing.JFrame {
       java.awt.EventQueue.invokeLater(new Runnable() {
           public void run() {
             new Jframe1().setVisible(true);
+            
             }
       });
       
