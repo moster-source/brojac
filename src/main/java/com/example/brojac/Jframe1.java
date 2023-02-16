@@ -8,10 +8,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.image.ColorModel;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.swing.JFrame;
 
 
 /**
@@ -363,7 +361,6 @@ public class Jframe1 extends javax.swing.JFrame {
               }
               //System.out.println("duzina je " + duzina);
               
-			
             }
     },0, 30);
      
@@ -376,10 +373,7 @@ public class Jframe1 extends javax.swing.JFrame {
         intDuzina=10;
         blicaj();
         
-        
-        
-        //##kraj blicanja
-        
+     
        
        if(blnVecIde){
            return;
@@ -396,10 +390,10 @@ public class Jframe1 extends javax.swing.JFrame {
         else{
             
             try{
-                intDuzina = Integer.valueOf(strDuzina);
+                    intDuzina = Integer.valueOf(strDuzina);
                 }    
                 catch(Exception e){
-                return;
+                    return;
                 }
             countdown = intDuzina;
             if(!blnVecIde){
@@ -407,7 +401,7 @@ public class Jframe1 extends javax.swing.JFrame {
                 countingDown();
                // System.out.println("opet zvao countdown");
             }
-            }
+        }
         
         //blnVecIde=false;
        // System.out.println("kraj button click");
@@ -438,9 +432,9 @@ public class Jframe1 extends javax.swing.JFrame {
             }
         }
                 if(evt.getKeyCode() == KeyEvent.VK_F6) {
-            Jframe1.this.setState(Frame.ICONIFIED);
+                    Jframe1.this.setState(Frame.ICONIFIED);
            
-        }
+                }
             
     }//GEN-LAST:event_txtDuzinaKeyPressed
 
@@ -514,6 +508,7 @@ public class Jframe1 extends javax.swing.JFrame {
                 jButton1.doClick();
             }
         }
+        
         //else if(evt.getKeyCode()== KeyEvent.VK_F5){
             
     }//GEN-LAST:event_jButton2KeyPressed
