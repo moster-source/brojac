@@ -409,6 +409,10 @@ public class Jframe1 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         stop = true;                // TODO add your handling code here:
+        if(blnVecIde){
+            System.out.println("Vec ide na klik");
+            return;
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
