@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -17,14 +18,17 @@ import java.util.TimerTask;
  * @author krpa
  */
 public class Jframe1 extends javax.swing.JFrame {
+    //Main-Class: com.example.brojac.Jframe1
     
    int countdown = 0;
    Boolean stop = false;
    Boolean blnVecIde = false;
    Color c;
    int intDuzina;
-   
-   
+   long lngStartOvertime;
+   long lngStopOvertime;
+   boolean blnOvertimeGoing = false;
+   int intUkupnaDuzina=0;
    //ovo je glavna metoda
     public void countingDown(){
    
@@ -42,36 +46,33 @@ public class Jframe1 extends javax.swing.JFrame {
             public void run() {
              countdown = countdown - 1;
              if (countdown < 0){
+                 blnOvertimeGoing=false;  //daj dopustenje
+                 countingDown2(); //nastavak brojanja od kraja
+                 
                  timer.cancel();
                  timer.purge();
                  blnVecIde=false;
                  //System.out.println("Izasao na kraju"); //test
                  Toolkit.getDefaultToolkit().beep();
                  Jframe1.super.setVisible(true);
-                 lblOdbrojavanje.setText("####");
+                 //lblOdbrojavanje.setText("####");
+                 //lblOdbrojavanje.setText(strVratiVrijeme(countdown));
+                 //lblOdbrojavanje.setText(strVratiVrijeme(Integer.valueOf(txtDuzina.getText())));
+                 upisiUkupnuDuzinu();
+                 lblOdbrojavanje.setText(strVratiVrijeme(intUkupnaDuzina));  //vrati na original
+
+                //intDuzina
+                 
                  lblOdbrojavanje.setForeground(Color.RED);
                  blnVecIde=false;
                  
                  //postavi prozor u prvi plan
                  int d = java.awt.Frame.ICONIFIED;
-                                     Jframe1.super.setAlwaysOnTop(true);
+                    Jframe1.super.setAlwaysOnTop(true);
                     Jframe1.super.toFront();
                     Jframe1.super.requestFocus();
                     Jframe1.super.setAlwaysOnTop(false);
-                 //dize kad je u pozadini
-                    //Jframe1.super.setAlwaysOnTop(true);
-                    //Jframe1.super.setVisible(true);
-                    //Jframe1.super.setFocusable(true);
-                    //Jframe1.super.setExtendedState(JFrame.NORMAL);
                     Jframe1.super.toFront();
-                    //Jframe1.super.repaint();
-                    //Jframe1.super.requestFocus();
-                    //Jframe1.super.setAlwaysOnTop(true);
-                    //jButton1.requestFocus();
-                    //System.out.println("###");
-                    //System.out.println("gornji");
-                    //Jframe1.super.setExtendedState(JFrame.NORMAL);
-                 //
                 if(d== Jframe1.super.getState()){
                     Jframe1.super.setState(Frame.NORMAL);
                     Jframe1.super.requestFocus();
@@ -97,6 +98,61 @@ public class Jframe1 extends javax.swing.JFrame {
         },0, 1000);
     
     }
+    
+    
+    public void countingDown2(){
+        //int countdown = countdown;
+        //stop = false;
+        //blnVecIde=true;
+        Timer timer = new Timer();
+        lngStartOvertime=System.currentTimeMillis();
+       
+     timer.schedule(new TimerTask(){
+         
+            @Override
+            public void run() {
+             if (blnOvertimeGoing){
+                 timer.cancel();
+                 timer.purge();
+                 System.out.println("overtime vec ide"); 
+              
+            }
+            
+            else{
+                 lngStopOvertime=System.currentTimeMillis()-lngStartOvertime;
+                 jLabel2.setText(getDurationBreakdown(lngStopOvertime));
+            }
+
+            }   
+        },0, 1000);
+    
+    }
+        public static String getDurationBreakdown(long millis) {
+            if(millis < 0) {
+                throw new IllegalArgumentException("Duration must be greater than zero!");
+            }
+
+                //long days = TimeUnit.MILLISECONDS.toDays(millis);
+                //millis -= TimeUnit.DAYS.toMillis(days);
+                long hours = TimeUnit.MILLISECONDS.toHours(millis);
+                millis -= TimeUnit.HOURS.toMillis(hours);
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+                millis -= TimeUnit.MINUTES.toMillis(minutes);
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+
+            StringBuilder sb = new StringBuilder(64);
+            //sb.append(days);
+            //sb.append(" Days ");
+            sb.append(hours);
+            sb.append(" Sati ");
+            sb.append(minutes);
+            sb.append(" Minuta ");
+            sb.append(seconds);
+            sb.append(" Sekundi");
+
+            return(sb.toString());
+        }
+    
     private String strVratiVrijeme(int intSekunde){
         String strVrati = null;
         int intMinute = intSekunde / 60;
@@ -113,6 +169,14 @@ public class Jframe1 extends javax.swing.JFrame {
     public Jframe1() {
         initComponents();
         c=jButton1.getBackground();
+        
+        upisiUkupnuDuzinu();
+        lblOdbrojavanje.setText(strVratiVrijeme(intUkupnaDuzina));
+        
+        
+        
+        //jButton3.setVisible(false);
+        
     }
 
     /**
@@ -127,13 +191,15 @@ public class Jframe1 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblOdbrojavanje = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtDuzina1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
         txtDuzina = new javax.swing.JTextField();
         txtDuzina2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusCycleRoot(false);
@@ -155,6 +221,13 @@ public class Jframe1 extends javax.swing.JFrame {
         lblOdbrojavanje.setText("####");
         lblOdbrojavanje.setFocusable(false);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel2.setText("# Sati # Minuta # Sekundi");
+        jLabel2.setToolTipText("");
+        jLabel2.setFocusable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -162,18 +235,24 @@ public class Jframe1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblOdbrojavanje, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2))
         );
 
         jPanel2.setFocusCycleRoot(true);
@@ -196,18 +275,7 @@ public class Jframe1 extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
-        jButton3.setText("Min");
-        jButton3.setAlignmentX(0.5F);
-        jButton3.setFocusable(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         txtDuzina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtDuzina.setText("180");
         txtDuzina.setMinimumSize(new java.awt.Dimension(70, 35));
         txtDuzina.setName("txtDuzina"); // NOI18N
         txtDuzina.setPreferredSize(new java.awt.Dimension(70, 30));
@@ -265,45 +333,55 @@ public class Jframe1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        jLabel3.setText("sekunde");
+        jLabel3.setFocusable(false);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 9)); // NOI18N
+        jLabel4.setText("minute");
+        jLabel4.setFocusable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtDuzina1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtDuzina2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDuzina2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtDuzina1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtDuzina2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtDuzina2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDuzina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addComponent(jButton1))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -311,11 +389,12 @@ public class Jframe1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,45 +447,107 @@ public class Jframe1 extends javax.swing.JFrame {
      }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+        blnOvertimeGoing=true;     //zaustavi brojac
+        upisiUkupnuDuzinu();
+        lblOdbrojavanje.setText(strVratiVrijeme(intUkupnaDuzina));  //vrati na original
+        //jLabel2.setText(strVratiVrijeme(intUkupnaDuzina));
+        jLabel2.setText("# Sati # Minuta # Sekundi");
+        //jLabel2.setText("##:##");
         //## neka blicne malo
         intDuzina=10;
-        blicaj();
-        
-     
        
-       if(blnVecIde){
+        
+        if(blnVecIde){
            return;
        }
+         blicaj();
        //blnVecIde=true;
         System.out.println("Kliknio");
-        Integer intDuzina;
+        Integer intDuzina=0;
+        Integer intDuzina1=0;
         String strDuzina;
+        String strDuzina1;
+        
         strDuzina = txtDuzina.getText();
-                //System.out.println(strDuzina);
-
-        if(strDuzina.isBlank() || strDuzina.isEmpty()){
+        strDuzina1 = txtDuzina1.getText();
+        
+        try{
+            intDuzina = Integer.parseInt(strDuzina);
+            // is an integer!
+        } catch (NumberFormatException e) {
+           intDuzina=0;
+            System.out.println("Greska intDuzina");
         }
-        else{
-            
+        try{
+            intDuzina1 = Integer.parseInt(strDuzina1);
+            intDuzina1=intDuzina1*60;// is an integer!
+        } catch (NumberFormatException e) {
+           intDuzina1=0;
+           System.out.println("Greska intDuzina1");
+        }
+                
+        /*
+        if(strDuzina.isBlank() || strDuzina.isEmpty()){
+            strDuzina="0";
+        }
+         if(strDuzina1.isBlank() || strDuzina1.isEmpty()){
+            strDuzina1="0";
+        }
+        */
+            /*
             try{
-                    intDuzina = Integer.valueOf(strDuzina);
+                    //intDuzina = Integer.valueOf(strDuzina);
+                    intDuzina=Integer.parseInt(strDuzina);
+                    intDuzina=intDuzina+(Integer.parseInt(strDuzina1)*60);
                 }    
                 catch(Exception e){
-                    return;
+                    System.out.println("Greska");
                 }
-            countdown = intDuzina;
+            */
+            countdown = intDuzina+intDuzina1;
+            if(countdown<1){
+                
+                System.out.println(String.valueOf(intDuzina+intDuzina1));
+                return;
+            }
             if(!blnVecIde){
                 blnVecIde=true;
+                
                 countingDown();
                // System.out.println("opet zvao countdown");
             }
-        }
+        
         
         //blnVecIde=false;
        // System.out.println("kraj button click");
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void upisiUkupnuDuzinu(){
+    //string strDuzina = txtDuzina.getText();
+        //strDuzina1 = txtDuzina1.getText();
+        int x;
+        int y;
+        try{
+            x = Integer.parseInt(txtDuzina.getText());
+            // is an integer!
+        } catch (NumberFormatException e) {
+           x=0;
+            System.out.println("Greska intDuzina");
+        }
+        
+        try{
+            y = Integer.parseInt(txtDuzina1.getText());
+            y=y*60;// is an integer!
+        } catch (NumberFormatException e) {
+           y=0;
+           System.out.println("Greska intDuzina1");
+        }
+        intUkupnaDuzina=y+x;
+                
+    
+    
+    
+    }
+        
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         stop = true;                // TODO add your handling code here:
         if(blnVecIde){
@@ -463,7 +604,7 @@ public class Jframe1 extends javax.swing.JFrame {
         // TODO add your handling code here:
              
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jButton3.doClick();
+            //jButton3.doClick();
         }
         else if(evt.getKeyCode() == KeyEvent.VK_F5){
             if(blnVecIde){
@@ -488,15 +629,6 @@ public class Jframe1 extends javax.swing.JFrame {
                 
             
     }//GEN-LAST:event_txtDuzina1KeyPressed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-        int a = Integer.parseInt(txtDuzina1.getText());
-        int b = a * 60;
-        txtDuzina.setText(Integer.toString(b));
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
         // TODO add your handling code here:
@@ -604,8 +736,10 @@ public class Jframe1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblOdbrojavanje;
